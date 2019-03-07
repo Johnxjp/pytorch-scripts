@@ -1,7 +1,7 @@
 import torch
 
 
-def one_hot(x: torch.Tensor, categories):
+def one_hot(x, categories):
     """
     Transforms a tensor of integer labels into a one-hot vector
 
@@ -20,3 +20,11 @@ def one_hot(x: torch.Tensor, categories):
 
 def reverse_one_hot(x):
     return torch.argmax(x, dim=1)
+
+
+def normalise(x):
+
+    if len(x.size()) == 1:
+        return x / torch.norm(x)
+
+    return x / torch.norm(x, dim=1, keepdim=True)
